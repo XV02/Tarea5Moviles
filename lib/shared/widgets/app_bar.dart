@@ -13,11 +13,13 @@ class ForageAppBar extends StatelessWidget implements PreferredSizeWidget {
         PopupMenuButton(
           itemBuilder: (BuildContext context) {
             return [
-              const PopupMenuItem(
-                child: Text('Main Page'),
+              PopupMenuItem(
+                onTap: () => Navigator.pushNamed(context, '/home'),
+                child: const Text('Main Page'),
               ),
-              const PopupMenuItem(
-                child: Text('Create'),
+              PopupMenuItem(
+                onTap: () => Navigator.pushNamed(context, '/create'),
+                child: const Text('Create'),
               ),
             ];
           },
