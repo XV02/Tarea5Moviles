@@ -10,19 +10,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: const ForageAppBar(),
-        body: ListView.builder(
-            itemCount: context.watch<ForageListProvider>().length(),
-            itemBuilder: (BuildContext context, int index) {
-              return ListTile(
-                title:
-                    Text(context.watch<ForageListProvider>().get(index).name!),
-                subtitle: Text(
-                    context.watch<ForageListProvider>().get(index).location!),
-                onTap: () {
-                  Navigator.pushNamed(context, '/details');
-                },
-              );
-            }),
+        body: const HomePageList(),
         floatingActionButton: FloatingActionButton(
           shape: const CircleBorder(),
           backgroundColor: Colors.purple,
@@ -31,5 +19,29 @@ class HomePage extends StatelessWidget {
           },
           child: const Icon(Icons.add, color: Colors.white),
         ));
+  }
+}
+
+class HomePageList extends StatelessWidget {
+  const HomePageList({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+        itemCount: context.watch<ForageListProvider>().length(),
+        itemBuilder: (BuildContext context, int index) {
+          return ListTile(
+            title: Text(context.watch<ForageListProvider>().get(index).name!),
+            subtitle:
+                Text(context.watch<ForageListProvider>().get(index).location!),
+            onTap: () {
+              context.read<ForageListProvider>().setSelectedForage(
+                  context.read<ForageListProvider>().get(index));
+              Navigator.pushNamed(context, '/details');
+            },
+          );
+        });
   }
 }

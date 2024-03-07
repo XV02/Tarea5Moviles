@@ -3,9 +3,14 @@ import 'package:tarea_5/shared/interfaces/forage_element.dart';
 
 class ForageListProvider with ChangeNotifier {
   final List<ForageElement> _forages = [];
+  ForageElement _selectedForage = ForageElement();
 
-  List<ForageElement> getForages() {
-    return _forages;
+  ForageElement get selectedForage => _selectedForage;
+  List<ForageElement> get forages => _forages;
+
+  void setSelectedForage(ForageElement forage) {
+    _selectedForage = forage;
+    notifyListeners();
   }
 
   void addForage(ForageElement forage) {
